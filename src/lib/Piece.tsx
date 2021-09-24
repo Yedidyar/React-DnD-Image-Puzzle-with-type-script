@@ -2,7 +2,7 @@ import React, { memo } from "react";
 import PropTypes from "prop-types";
 import { useDrag, useDrop } from "react-dnd";
 import { puzzlePieceStyles } from "./styles";
-
+import style from "./piece.module.css";
 interface Props {
   id: string;
   src: string;
@@ -35,7 +35,7 @@ const Piece: React.FC<Props> = memo((props) => {
   });
 
   return (
-    <div className="puzzle-piece" ref={dropRef}>
+    <div className={`puzzle-piece ${style.GridItemWrapper}`} ref={dropRef}>
       <div ref={dragEl} style={puzzlePieceStyles({ ...props, isOver })}></div>
     </div>
   );

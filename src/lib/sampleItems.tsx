@@ -1,7 +1,7 @@
 export const sampleItems = [
   {
     id: "8c444080-9e02-4946-9205-ea65ed81a66f",
-    src: "https://images.pexels.com/photos/2575279/pexels-photo-2575279.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260",
+    src: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS97k6uTGVQL_uQKootyDZGwLTxGU5x_UVgVnH5TnlJ_z_RSf625Cm8GhkGL8QXyujY3zI&usqp=CAU",
   },
   {
     id: "0a62f9fa-6f5c-4b09-8ff0-d2b9169426f9",

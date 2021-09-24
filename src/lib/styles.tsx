@@ -15,9 +15,10 @@ export const puzzleWrapperStyles = (
   props: React.PropsWithChildren<PuzzleWrapperStylesProps>
 ) => {
   return {
-    display: "grid",
-    gridTemplateColumns: `${props.width}px ${props.width}px ${props.width}px`,
-    padding: 0,
+    width: "600px",
+    display: "flex",
+    justifyContent: "start",
+    flexWrap: "wrap",
   } as React.CSSProperties;
 };
 
@@ -29,8 +30,8 @@ export const puzzlePieceStyles = (
   margin: "0 -1px -1px",
   border: "1px solid #000",
   backgroundImage: `url(${props.src})`,
-  backgroundSize: `${props.width}px ${props.height}px`,
   opacity: `${props.isOver ? "0.2" : "1"}`,
-  backgroundRepeat: "no-repeat",
   cursor: "move",
+  backgroundSize: "cover",
+  backgroundPosition: " 50%",
 });

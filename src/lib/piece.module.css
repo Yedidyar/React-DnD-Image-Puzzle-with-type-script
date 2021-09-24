@@ -1,0 +1,11 @@
+.GridItemWrapper {
+  flex: 0 0 33.3%;
+  display: flex;
+  justify-content: center;
+  align-items: stretch;
+  box-sizing: border-box;
+}
+.GridItemWrapper:before {
+  content: "";
+  display: table;
+}
