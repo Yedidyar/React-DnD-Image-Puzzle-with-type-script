@@ -4,34 +4,27 @@ import { useDrag, useDrop } from "react-dnd";
 import { puzzlePieceStyles } from "./styles";
 
 interface Props {
-  width: number;
+  id: string;
+  src: string;
   height: number;
-  pieces: number;
-  image: string;
-  position: number;
-  coords: {
-    x: number;
-    y: number;
-  };
-  onDropPiece: (sourcePosition: number, dropPosition: number) => void;
+  width: number;
+  onDropPiece: (sourcePosition: string, dropPosition: string) => void;
 }
 
 const Piece: React.FC<Props> = memo((props) => {
-  const { position, onDropPiece } = props;
+  const { id, src, onDropPiece } = props;
 
   const [, dragEl] = useDrag({
     type: "PIECE",
-    item: { position },
+    item: { id },
   });
 
   const [{ isOver }, dropRef] = useDrop({
     accept: "PIECE",
-    drop: (item: { position: number }, monitor) => {
-      console.log(item);
-
+    drop: (item: { id: string }, monitor) => {
       onDropPiece(
-        item.position, // source position
-        position // drop position
+        item.id, // source position
+        id // drop position
       );
     },
     collect: (monitor) => {
@@ -47,14 +40,5 @@ const Piece: React.FC<Props> = memo((props) => {
     </div>
   );
 });
-
-Piece.propTypes = {
-  image: PropTypes.string.isRequired,
-  width: PropTypes.number.isRequired,
-  height: PropTypes.number.isRequired,
-  pieces: PropTypes.number.isRequired,
-  position: PropTypes.number.isRequired,
-  onDropPiece: PropTypes.func.isRequired,
-};
 
 export default Piece;

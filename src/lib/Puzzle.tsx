@@ -1,58 +1,66 @@
-import React, { useState } from "react";
-import PropTypes from "prop-types";
+import React, { useEffect, useState } from "react";
 import { HTML5Backend } from "react-dnd-html5-backend";
 import { DndProvider } from "react-dnd";
 import { puzzleWrapperStyles } from "./styles";
 import { shuffle, isEqual } from "./utils";
 import Piece from "./Piece";
+
+import { sampleItems } from "../lib/sampleItems";
 interface Props {
   width: number;
   height: number;
-  pieces: number;
-  image: string;
   onComplete: () => void;
 }
+interface Image {
+  src: string;
+  id: string;
+}
 const Puzzle: React.FC<Props> = (props) => {
-  const { width, height, pieces, onComplete } = props;
-  const rootPositions = [...Array(pieces * pieces).keys()];
-  const [positions, setPositions] = useState(shuffle(rootPositions));
+  const { onComplete, width, height } = props;
+  const [items, setItems] = useState(sampleItems);
+  useEffect(() => {
+    console.log("changeg");
+  }, [items]);
 
-  const coords = rootPositions.map((pos) => ({
-    x: Math.floor((pos % pieces) * (width / pieces)),
-    y: Math.floor(pos / pieces) * (height / pieces),
-  }));
-
-  const onDropPiece = (sourcePosition: number, dropPosition: number) => {
-    const oldPositions = positions.slice();
-    const newPositions = [];
-
-    for (let i in oldPositions) {
-      const value = oldPositions[i];
-      let newValue = value;
-
-      if (value === sourcePosition) {
-        newValue = dropPosition;
-      } else if (value === dropPosition) {
-        newValue = sourcePosition;
-      }
-
-      newPositions.push(newValue);
+  function move(array: Image[], oldIndex: number, newIndex: number) {
+    console.log(oldIndex, newIndex);
+    if (newIndex >= array.length) {
+      newIndex = array.length - 1;
     }
 
-    setPositions(newPositions);
+    array.splice(newIndex, 0, array.splice(oldIndex, 1)[0]);
+    return array;
+  }
 
-    if (isEqual(rootPositions, newPositions)) {
-      onComplete();
+  function moveElement(array: Image[], index: number, offset: number) {
+    const newIndex = index + offset;
+
+    return move(array, index, newIndex);
+  }
+
+  const onDropPiece = (sourceId: string, destinationId: string) => {
+    const sourceIndex = items.findIndex((item) => item.id === sourceId);
+    const destinationIndex = items.findIndex(
+      (item) => item.id === destinationId
+    );
+
+    // If source/destination is unknown, do nothing.
+    if (sourceIndex === -1 || destinationIndex === -1) {
+      return;
     }
+
+    const offset = destinationIndex - sourceIndex;
+
+    setItems((prevState) => [...moveElement(prevState, sourceIndex, offset)]);
   };
 
   const renderPieces = () =>
-    positions.map((i) => (
+    items.map((item) => (
       <Piece
-        key={i}
-        position={i}
+        key={item.id}
+        id={item.id}
+        src={item.src}
         onDropPiece={onDropPiece}
-        coords={coords[i]}
         {...props}
       />
     ));
@@ -81,12 +89,5 @@ const Puzzle: React.FC<Props> = (props) => {
 //     new Error("Invalid prop type `pieces`. It should be >= 1"),
 //   onComplete: PropTypes.func,
 // };
-
-Puzzle.defaultProps = {
-  width: 400,
-  height: 300,
-  pieces: 3,
-  onComplete: () => {},
-};
 
 export default Puzzle;
