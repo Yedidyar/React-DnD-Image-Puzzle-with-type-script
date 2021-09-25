@@ -1,0 +1,36 @@
+.infoIcon:hover {
+  fill: red;
+}
+.puzzle-and-tooltip-div {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  min-height: 90vh;
+}
+.toolTipModal {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.timer {
+  font-size: larger;
+  font-weight: bolder;
+  font-family: cursive;
+}
+.aircraftModalPic {
+  height: 40vh;
+  border-radius: 20px;
+  padding: 10px 10px;
+  max-width: 90%;
+}
+.blur {
+  filter: blur(10px);
+  cursor: none;
+  transition: 0.3s filter linear;
+}
+.noBlur {
+  filter: blur(0px);
+  transition: 0.3s filter linear;
+}
