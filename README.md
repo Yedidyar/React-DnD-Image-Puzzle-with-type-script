@@ -11,6 +11,9 @@ npm start
 
 ## Live demo
 
-<!-- ### [live-demo](https://react-dnd-pule.glitch.me/) -->
+### [live-demo](https://dnd-image-puzzle-react.herokuapp.com/)
+
+<br>
+<br>
 
 ![Live demo](./docs/assets/gif/react-dnd-image-puzzle.gif)
