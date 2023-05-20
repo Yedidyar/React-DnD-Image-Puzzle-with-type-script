@@ -11,6 +11,8 @@ npm start
 
 ## Live demo
 
+Unfortunately, it does not work since Heroku stopped the free tier.
+
 ### [live-demo](https://dnd-image-puzzle-react.herokuapp.com/)
 
 <br>
